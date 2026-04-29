@@ -2,6 +2,11 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 const nav = document.getElementById('nav');
 const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
+const heroSection = document.querySelector('.hero');
+const heroGrid = document.querySelector('.hero-grid');
+const heroCopy = document.querySelector('.hero-copy');
+const heroCard = document.querySelector('.hero-card');
+const heroVideoWrap = document.querySelector('.hero-video-wrap');
 const heroVideo = document.querySelector('.hero-video');
 const heroVideoMobileQuery = window.matchMedia('(max-width: 640px)');
 const teamCards = document.querySelectorAll('.team-reveal-card');
@@ -71,6 +76,21 @@ if (!prefersReducedMotion) {
   });
 }
 
+function syncHeroLayout() {
+  if (!heroSection || !heroGrid || !heroCopy || !heroCard || !heroVideoWrap) return;
+
+  if (heroVideoMobileQuery.matches) {
+    if (heroCopy.nextElementSibling !== heroVideoWrap) {
+      heroGrid.insertBefore(heroVideoWrap, heroCard);
+    }
+    return;
+  }
+
+  if (heroSection.firstElementChild !== heroVideoWrap) {
+    heroSection.insertBefore(heroVideoWrap, heroGrid);
+  }
+}
+
 if (heroVideo) {
   const primarySource = heroVideo.querySelector('source');
   const desktopSrc = heroVideo.dataset.desktopSrc || primarySource?.getAttribute('src');
@@ -92,6 +112,7 @@ if (heroVideo) {
     });
   };
 
+  syncHeroLayout();
   applyHeroVideoSource();
 
   heroVideo.addEventListener('ended', () => {
@@ -103,6 +124,7 @@ if (heroVideo) {
 
   if (typeof heroVideoMobileQuery.addEventListener === 'function') {
     heroVideoMobileQuery.addEventListener('change', () => {
+      syncHeroLayout();
       applyHeroVideoSource();
       playHeroVideo();
     });
@@ -178,7 +200,9 @@ function refreshExpandableCards() {
 
 refreshTeamBioCards();
 refreshExpandableCards();
+window.addEventListener('load', syncHeroLayout);
 window.addEventListener('load', refreshTeamBioCards);
 window.addEventListener('load', refreshExpandableCards);
+window.addEventListener('resize', syncHeroLayout);
 window.addEventListener('resize', refreshTeamBioCards);
 window.addEventListener('resize', refreshExpandableCards);

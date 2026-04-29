@@ -1204,18 +1204,19 @@ footer {
   }
   section { padding: 64px 0; }
   .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    display: block;
     min-height: auto;
     padding-top: 118px;
     padding-bottom: 28px;
     overflow: visible;
   }
   .hero-grid {
-    order: 1;
+    width: min(var(--max), calc(100% - 24px));
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     gap: 22px;
-    align-items: start;
+    align-items: stretch;
   }
   .hero-copy {
     max-width: none;
@@ -1234,12 +1235,11 @@ footer {
   .hero-actions, .contact-actions { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
   .hero-video-wrap {
-    order: 2;
     position: relative;
     inset: auto;
-    width: min(var(--max), calc(100% - 24px));
+    width: 100%;
     aspect-ratio: 16 / 9;
-    margin: 24px auto 0;
+    margin: 0;
     border-radius: 26px;
     border: 1px solid rgba(201,160,74,0.14);
     background: #050505;
@@ -1258,6 +1258,10 @@ footer {
     object-position: center center;
     transform: none;
     opacity: 0.9;
+  }
+  .hero-card {
+    width: 100%;
+    margin-top: 0;
   }
   .ecosystem-orbit {
     min-height: 0;
