@@ -3,6 +3,7 @@ const nav = document.getElementById('nav');
 const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 const heroVideo = document.querySelector('.hero-video');
+const heroVideoMobileQuery = window.matchMedia('(max-width: 640px)');
 const teamCards = document.querySelectorAll('.team-reveal-card');
 const teamBioCards = document.querySelectorAll('[data-team-bio-card]');
 const expandableCards = document.querySelectorAll('.service-card');
@@ -71,6 +72,28 @@ if (!prefersReducedMotion) {
 }
 
 if (heroVideo) {
+  const primarySource = heroVideo.querySelector('source');
+  const desktopSrc = heroVideo.dataset.desktopSrc || primarySource?.getAttribute('src');
+  const mobileSrc = heroVideo.dataset.mobileSrc;
+
+  const applyHeroVideoSource = () => {
+    if (!primarySource) return;
+    const nextSrc = heroVideoMobileQuery.matches && mobileSrc ? mobileSrc : desktopSrc;
+    if (!nextSrc || primarySource.getAttribute('src') === nextSrc) return;
+    primarySource.setAttribute('src', nextSrc);
+    heroVideo.load();
+  };
+
+  const playHeroVideo = () => {
+    heroVideo.play().catch(() => {
+      if (!heroVideoMobileQuery.matches) {
+        heroVideo.setAttribute('controls', 'controls');
+      }
+    });
+  };
+
+  applyHeroVideoSource();
+
   heroVideo.addEventListener('ended', () => {
     if (heroVideo.duration && Number.isFinite(heroVideo.duration)) {
       heroVideo.currentTime = Math.max(0, heroVideo.duration - 0.05);
@@ -78,9 +101,14 @@ if (heroVideo) {
     heroVideo.pause();
   });
 
-  heroVideo.play().catch(() => {
-    heroVideo.setAttribute('controls', 'controls');
-  });
+  if (typeof heroVideoMobileQuery.addEventListener === 'function') {
+    heroVideoMobileQuery.addEventListener('change', () => {
+      applyHeroVideoSource();
+      playHeroVideo();
+    });
+  }
+
+  playHeroVideo();
 }
 
 function refreshTeamBioCards() {
