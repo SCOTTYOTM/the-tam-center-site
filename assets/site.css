@@ -1229,10 +1229,14 @@ footer {
   .hero-kicker { width: 100%; justify-content: center; text-align: center; }
   .hero-actions, .contact-actions { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
+  .hero-video-wrap {
+    background: #050505;
+  }
   .hero-video {
-    object-position: center 38%;
-    transform: scale(1.08);
-    opacity: 0.78;
+    object-fit: contain;
+    object-position: center top;
+    transform: none;
+    opacity: 0.76;
   }
   .ecosystem-orbit {
     min-height: 0;
