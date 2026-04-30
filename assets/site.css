@@ -1204,13 +1204,16 @@ footer {
   }
   section { padding: 64px 0; }
   .hero {
+    position: relative;
     display: block;
     min-height: auto;
     padding-top: 118px;
     padding-bottom: 28px;
-    overflow: visible;
+    overflow: hidden;
   }
   .hero-grid {
+    position: relative;
+    z-index: 2;
     width: min(var(--max), calc(100% - 24px));
     margin: 0 auto;
     display: flex;
@@ -1219,7 +1222,10 @@ footer {
     align-items: stretch;
   }
   .hero-copy {
+    position: relative;
+    z-index: 2;
     max-width: none;
+    padding-top: 12px;
   }
   .hero-copy h1 {
     font-size: clamp(2.35rem, 13vw, 4rem);
@@ -1235,22 +1241,27 @@ footer {
   .hero-actions, .contact-actions { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
   .hero-video-wrap {
-    position: relative;
-    inset: auto;
-    width: 100%;
+    position: absolute;
+    top: 118px;
+    left: 50%;
+    inset: 118px auto auto 50%;
+    width: min(var(--max), calc(100% - 24px));
     aspect-ratio: 16 / 9;
     margin: 0;
+    transform: translateX(-50%);
+    z-index: 0;
     border-radius: 26px;
     border: 1px solid rgba(201,160,74,0.14);
     background: #050505;
     overflow: hidden;
+    pointer-events: none;
   }
   .hero-video-wrap::before {
-    opacity: 0.12;
+    opacity: 0.16;
   }
   .hero-video-wrap::after {
     background:
-      linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.18) 100%),
+      linear-gradient(180deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.44) 38%, rgba(0,0,0,0.78) 100%),
       radial-gradient(circle at center, rgba(201,160,74,0.08), transparent 44%);
   }
   .hero-video {
@@ -1260,8 +1271,10 @@ footer {
     opacity: 0.9;
   }
   .hero-card {
+    position: relative;
+    z-index: 2;
     width: 100%;
-    margin-top: 0;
+    margin-top: 8px;
   }
   .ecosystem-orbit {
     min-height: 0;

@@ -4,8 +4,6 @@ const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 const heroSection = document.querySelector('.hero');
 const heroGrid = document.querySelector('.hero-grid');
-const heroCopy = document.querySelector('.hero-copy');
-const heroCard = document.querySelector('.hero-card');
 const heroVideoWrap = document.querySelector('.hero-video-wrap');
 const heroVideo = document.querySelector('.hero-video');
 const heroVideoMobileQuery = window.matchMedia('(max-width: 640px)');
@@ -77,14 +75,7 @@ if (!prefersReducedMotion) {
 }
 
 function syncHeroLayout() {
-  if (!heroSection || !heroGrid || !heroCopy || !heroCard || !heroVideoWrap) return;
-
-  if (heroVideoMobileQuery.matches) {
-    if (heroCopy.nextElementSibling !== heroVideoWrap) {
-      heroGrid.insertBefore(heroVideoWrap, heroCard);
-    }
-    return;
-  }
+  if (!heroSection || !heroGrid || !heroVideoWrap) return;
 
   if (heroSection.firstElementChild !== heroVideoWrap) {
     heroSection.insertBefore(heroVideoWrap, heroGrid);
