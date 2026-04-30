@@ -1206,9 +1206,9 @@ footer {
   .hero {
     position: relative;
     display: block;
-    min-height: auto;
+    min-height: 100svh;
     padding-top: 118px;
-    padding-bottom: 28px;
+    padding-bottom: 34px;
     overflow: hidden;
   }
   .hero-grid {
@@ -1242,39 +1242,37 @@ footer {
   .btn { width: 100%; }
   .hero-video-wrap {
     position: absolute;
-    top: 118px;
-    left: 50%;
-    inset: 118px auto auto 50%;
-    width: min(var(--max), calc(100% - 24px));
-    aspect-ratio: 16 / 9;
+    inset: 0;
+    width: auto;
+    aspect-ratio: auto;
     margin: 0;
-    transform: translateX(-50%);
+    transform: none;
     z-index: 0;
-    border-radius: 26px;
-    border: 1px solid rgba(201,160,74,0.14);
+    border-radius: 0;
+    border: 0;
     background: #050505;
     overflow: hidden;
     pointer-events: none;
   }
   .hero-video-wrap::before {
-    opacity: 0.16;
+    opacity: 0.34;
   }
   .hero-video-wrap::after {
     background:
-      linear-gradient(180deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.44) 38%, rgba(0,0,0,0.78) 100%),
-      radial-gradient(circle at center, rgba(201,160,74,0.08), transparent 44%);
+      linear-gradient(180deg, rgba(0,0,0,0.24) 0%, rgba(0,0,0,0.42) 38%, rgba(5,5,5,0.92) 100%),
+      radial-gradient(circle at center, rgba(201,160,74,0.10), transparent 42%);
   }
   .hero-video {
-    object-fit: contain;
-    object-position: center center;
-    transform: none;
-    opacity: 0.9;
+    object-fit: cover;
+    object-position: center 42%;
+    transform: scale(1.04);
+    opacity: 0.82;
   }
   .hero-card {
     position: relative;
     z-index: 2;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 18px;
   }
   .ecosystem-orbit {
     min-height: 0;
@@ -1370,7 +1368,7 @@ footer {
     margin-top: 14px;
   }
   .team-reveal-summary {
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     font-size: 0.95rem;
   }
   .team-reveal-card[data-team-bio-card] .team-reveal-summary {
